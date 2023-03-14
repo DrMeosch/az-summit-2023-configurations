@@ -1,0 +1,54 @@
+variables:
+- name: vEnvironment
+  value: Education
+
+- name: condition
+  value: |
+    or
+    (
+      in(dependencies.DevAdvance.result, 'Succeeded'),
+      in(dependencies.Acceptance.result, 'Succeeded'),
+      in(dependencies.DevAdvance2.result, 'Succeeded'),
+      in(dependencies.DevAdvance3.result, 'Succeeded'),
+      in(dependencies.DevAdvance4.result, 'Succeeded'),
+      in(dependencies.DevAdvance5.result, 'Succeeded'),
+      in(dependencies.Acceptance2.result, 'Succeeded'),
+      in(dependencies.Acceptance3.result, 'Succeeded'),
+      in(dependencies.Acceptance4.result, 'Succeeded'),
+      in(dependencies.Acceptance5.result, 'Succeeded'),
+      in(dependencies.Maintenance2.result, 'Succeeded'),
+      succeeded()
+    )
+
+- name: vEnv
+  value: Edu
+
+- name: DevOpsEnv
+  value: az-summit-2023-env-applications
+
+- name: SiteName
+  value: EduServerApp2
+
+- name: SiteRoot
+  value: C:\Data\www\EduServerApp2
+
+- name: Bindings
+  value: |
+    {"bindings":
+     [
+      {
+        "protocol": "http",
+        "ipAddress": "All Unassigned",
+        "port": "7101",
+        "hostname": ""
+      }
+     ]
+    }
+
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/release/azure-key-vault?view=azure-devops
+- name: azureServiceConnection
+  value: devops-nonprod
+
+# short kv name, no typo here
+- name: KeyVaultName
+  value: Kv-nonprod

@@ -1,0 +1,43 @@
+variables:
+- name: vEnvironment
+  value: DevAdvance3
+
+- name: condition
+  value: |
+    or
+    (
+      in(dependencies.Build.result, 'Succeeded', 'SucceededWithIssues', 'Skipped'),
+      succeeded()
+    )
+- name: vEnv
+  value: DevAdv3
+
+- name: DevOpsEnv
+  value: az-summit-2023-env-applications
+
+- name: SiteName
+  value: DevAdv3ServerApp2
+
+- name: SiteRoot
+  value: C:\Data\www\DevAdv3ServerApp2
+
+- name: Bindings
+  value: |
+    {"bindings":
+     [
+      {
+        "protocol": "http",
+        "ipAddress": "All Unassigned",
+        "port": "7501",
+        "hostname": ""
+      }
+     ]
+    }
+
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/release/azure-key-vault?view=azure-devops
+- name: azureServiceConnection
+  value: devops-nonprod
+
+# short kv name, no typo here
+- name: KeyVaultName
+  value: Kv-nonprod

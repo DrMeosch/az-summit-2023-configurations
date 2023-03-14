@@ -1,0 +1,45 @@
+variables:
+- name: vEnvironment
+  value: Production
+
+- name: condition
+  value: |
+    or
+    (
+      in(dependencies.Integration.result, 'Succeeded'),
+      in(dependencies.Production.result, 'Succeeded'),
+      succeeded()
+    )
+
+- name: vEnv
+  value: Prod
+
+- name: DevOpsEnv
+  value: az-summit-2023-env-applications
+
+- name: SiteName
+  value: ProdServer
+
+- name: SiteRoot
+  value: C:\Data\www\ProdServer
+
+- name: Bindings
+  value: |
+    {"bindings":
+     [
+      {
+        "protocol": "http",
+        "ipAddress": "All Unassigned",
+        "port": "8001",
+        "hostname": ""
+      }
+     ]
+    }
+
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/release/azure-key-vault?view=azure-devops
+- name: azureServiceConnection
+  value: devops-prod
+
+# short kv name, no typo here
+- name: KeyVaultName
+  value: Kv-prod
